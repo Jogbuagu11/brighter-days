@@ -12,7 +12,7 @@ export default function ContactPage() {
     setSending(true);
     const form = e.currentTarget;
     const data = new FormData(form);
-    await fetch("https://formspree.io/f/" + (process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORM_ID"), {
+    await fetch("https://formspree.io/f/xykbydog", {
       method: "POST",
       body: data,
       headers: { Accept: "application/json" },
