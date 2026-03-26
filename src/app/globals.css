@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0f1b2d;
+  --color-navy-light: #1a2a42;
+  --color-navy-lighter: #243654;
+  --color-charcoal: #1c1c1e;
+  --color-gold: #d4a853;
+  --color-gold-light: #e8c77b;
+  --color-amber: #e89b3e;
+  --color-cream: #faf6ef;
+  --color-cream-dark: #ede5d8;
+  --font-display: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Fade-in on scroll */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+/* Subtle glow for gold accent elements */
+.glow-gold {
+  box-shadow: 0 0 40px rgba(212, 168, 83, 0.15);
+}
