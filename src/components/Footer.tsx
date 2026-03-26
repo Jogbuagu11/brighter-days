@@ -40,8 +40,6 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-2 text-sm text-cream/60">
               <p>Lower Bay Area, California</p>
-              <p>info@brighterdayshousing.com</p>
-              <p>(510) 555-0199</p>
             </div>
           </div>
         </div>

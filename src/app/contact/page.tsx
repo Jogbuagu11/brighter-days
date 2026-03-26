@@ -5,9 +5,19 @@ import SectionReveal from "@/components/SectionReveal";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSending(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    await fetch("https://formspree.io/f/" + (process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORM_ID"), {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+    setSending(false);
     setSubmitted(true);
   }
 
@@ -49,18 +59,6 @@ export default function ContactPage() {
                     </h3>
                     <p className="text-cream/55">Lower Bay Area, California</p>
                   </div>
-                  <div>
-                    <h3 className="text-gold font-semibold text-sm uppercase tracking-wider mb-2">
-                      Email
-                    </h3>
-                    <p className="text-cream/55">info@brighterdayshousing.com</p>
-                  </div>
-                  <div>
-                    <h3 className="text-gold font-semibold text-sm uppercase tracking-wider mb-2">
-                      Phone
-                    </h3>
-                    <p className="text-cream/55">(510) 555-0199</p>
-                  </div>
                 </div>
               </div>
             </SectionReveal>
@@ -90,6 +88,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       type="text"
+                      name="name"
                       required
                       className="w-full bg-navy border border-white/10 rounded-xl px-4 py-3 text-cream placeholder-cream/30 focus:outline-none focus:border-gold/40 transition"
                       placeholder="Your full name"
@@ -101,8 +100,9 @@ export default function ContactPage() {
                       <label className="block text-sm font-medium text-cream/70 mb-2">
                         Phone
                       </label>
-                      <input
+                    <input
                         type="tel"
+                        name="phone"
                         className="w-full bg-navy border border-white/10 rounded-xl px-4 py-3 text-cream placeholder-cream/30 focus:outline-none focus:border-gold/40 transition"
                         placeholder="(555) 000-0000"
                       />
@@ -113,6 +113,7 @@ export default function ContactPage() {
                       </label>
                       <input
                         type="email"
+                        name="email"
                         required
                         className="w-full bg-navy border border-white/10 rounded-xl px-4 py-3 text-cream placeholder-cream/30 focus:outline-none focus:border-gold/40 transition"
                         placeholder="you@email.com"
@@ -125,6 +126,7 @@ export default function ContactPage() {
                       I am a&hellip;
                     </label>
                     <select
+                      name="role"
                       required
                       className="w-full bg-navy border border-white/10 rounded-xl px-4 py-3 text-cream focus:outline-none focus:border-gold/40 transition appearance-none"
                     >
@@ -146,6 +148,7 @@ export default function ContactPage() {
                       Message
                     </label>
                     <textarea
+                      name="message"
                       rows={5}
                       required
                       className="w-full bg-navy border border-white/10 rounded-xl px-4 py-3 text-cream placeholder-cream/30 focus:outline-none focus:border-gold/40 transition resize-none"
@@ -157,7 +160,7 @@ export default function ContactPage() {
                     type="submit"
                     className="w-full bg-gold text-navy font-semibold py-3.5 rounded-full hover:bg-gold-light transition text-base"
                   >
-                    Send Message
+                    {sending ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
